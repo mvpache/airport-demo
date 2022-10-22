@@ -30,7 +30,6 @@ class AirportSelector extends React.Component<IProps, IState> {
   };
 
   searchAirports = (): void => {
-    console.log('###CALLED');
     axios
       .get('https://test.api.amadeus.com/v1/reference-data/locations', {
         headers: {
