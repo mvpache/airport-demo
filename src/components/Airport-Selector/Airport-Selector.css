@@ -1,0 +1,14 @@
+.Airport-Selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.Search-Container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Airport-List {
+  display: flex;
+  flex-direction: column;
+}
