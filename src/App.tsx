@@ -18,8 +18,8 @@ interface IProps {}
 
 interface IState {
   accessToken?: string;
-  departingAirport?: Airport;
-  arrivingAirport?: Airport;
+  departingAirport?: Airport | null;
+  arrivingAirport?: Airport | null;
   flightDistance?: number;
 }
 
@@ -64,6 +64,14 @@ class App extends React.Component<IProps, IState> {
     this.setState({ arrivingAirport });
   };
 
+  removeDepartingAirport = (): void => {
+    this.setState({ departingAirport: null });
+  };
+
+  removeArrivingAirport = (): void => {
+    this.setState({ arrivingAirport: null });
+  };
+
   getDistance = (): void => {
     const convertGeoCodeToLatLngLiteral = (code: GeoCode): GoogleLatLng => {
       return { lat: code.latitude, lng: code.longitude };
@@ -92,12 +100,15 @@ class App extends React.Component<IProps, IState> {
   render() {
     return (
       <div className="App">
-        <div className="Airport-Contaner">
+        <h1>How Far Will You Fly?</h1>
+        <div className="Airport-Container">
           <h2>Departing Airport</h2>
           {this.state.departingAirport ? (
             <AirportItem
               isSelectable={false}
+              isRemovable={true}
               airport={this.state.departingAirport}
+              removeAirport={this.removeDepartingAirport}
             ></AirportItem>
           ) : (
             <AirportSelector
@@ -106,11 +117,13 @@ class App extends React.Component<IProps, IState> {
             ></AirportSelector>
           )}
         </div>
-        <div className="Airport-Contaner">
+        <div className="Airport-Container">
           <h2>Arriving Airport</h2>
           {this.state.arrivingAirport ? (
             <AirportItem
               isSelectable={false}
+              isRemovable={true}
+              removeAirport={this.removeArrivingAirport}
               airport={this.state.arrivingAirport}
             ></AirportItem>
           ) : (
@@ -120,9 +133,12 @@ class App extends React.Component<IProps, IState> {
             ></AirportSelector>
           )}
         </div>
-        <Button variant="contained" onClick={() => this.getDistance()}>
-          Get Distance
-        </Button>
+        {this.state.arrivingAirport && this.state.departingAirport && (
+          <Button variant="contained" onClick={() => this.getDistance()}>
+            Get Distance
+          </Button>
+        )}
+
         {this.state.flightDistance &&
           `You'll fly about ${this.state.flightDistance} miles on this trip!`}
       </div>
