@@ -51,7 +51,6 @@ class AirportSelector extends React.Component<IProps, IState> {
       .catch((res: any) => console.log(res));
   };
 
-  // TODO Load loadash debounce type
   debouncedAirportSearch = debounce(() => this.searchAirports(), 500);
 
   selectAirport = (airport: Airport): void => {

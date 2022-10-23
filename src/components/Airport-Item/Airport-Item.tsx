@@ -26,6 +26,7 @@ class AirportItem extends React.Component<IProps, IState> {
     }
   };
 
+  // TODO: These could probably a Mat-Card or something like that?
   render() {
     return (
       <div className="Airport-Item">

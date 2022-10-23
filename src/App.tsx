@@ -8,9 +8,6 @@ import AirportItem from './components/Airport-Item/Airport-Item';
 import { GeoCode } from './models/geo-code';
 import { loadMapApi } from './utils/GoogleMapsUtils';
 
-// Phase 3
-// mobile friendly + styling
-
 const metersPerNautMile = 1852;
 type GoogleLatLng = google.maps.LatLngLiteral;
 
@@ -31,7 +28,9 @@ class App extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
+    // load the googleAPI
     loadMapApi();
+    // calls to the airport API require a fresh access token for you client
     this.getAccessToken();
   }
 
